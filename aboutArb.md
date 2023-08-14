@@ -143,3 +143,6 @@ todo
 
 + 交互式证明中如何使用
  >>挑战者（validator）使用本地数据初始化WASM虚拟机，然后与Rollup合约进行交互。然后使用WASM虚拟机执行交互式证明，证明结果与挑战者本地数据进行比较，如果不一致则挑战成功，否则挑战失败,WASM将RBlock操作拆分至一个op code,并在L1 rollup中完成证明操作
+
+## 参考资料:
+https://docs.arbitrum.io/inside-arbitrum-nitro/
