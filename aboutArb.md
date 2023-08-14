@@ -61,10 +61,12 @@
 ## 跨链消息传递：
  
 ### L1->L2
+eth deposit
 1.延迟
 2.可重试
 
 ### L2->L1
+eth withdraw
 1.立即
 2.可重试
 
@@ -103,14 +105,11 @@ function stakeOnNewNode(
 function stakeOnExistingNode(uint64 nodeNum, bytes32 nodeHash) public onlyValidator whenNotPaused{}
 ```
 
-
-
-### Staking
-质押者存入由 Arbitrum 第 1 层合约持有的资金，如果质押者输掉挑战，将被没收。
-
-单个质押可以覆盖一系列RBlocks。每个质押者都押在最新确认的RBlock上;如果您押注在 RBlock 上，您也可以质押该 RBlock 的一个继任者。因此，您可能会被押注在一系列 RBlock 上，这些 RBlock 代表关于链正确历史的单个连贯声明。一个质押就足以让你承诺遵守这一系列的RBlocks。
-![](/image/4.png)
+![](/image/5.webp)
 ### 挑战流程
+![](/image/2.webp)
+
+
 
     
 
@@ -136,13 +135,11 @@ todo
 
 
 
-## note    
-1.RBlock确认后如何将RBlock stateRoot更新到L1 
+## note :   
++ RBlock确认后如何将RBlock stateRoot更新到L1 
 
-rollup contract stakeNewNode function
-2.交互式证明中如何使用
- 挑战者（validator）使用本地数据初始化WASM虚拟机，然后与Rollup合约进行交互。
- 
- 然后使用WASM虚拟机执行交互式证明，证明结果与挑战者本地数据进行比较，如果不一致则挑战成功，否则挑战失败
+>>rollup contract stakeNewNode function
 
-    WASM将RBlock操作拆分至一个op code,并在L1 rollup中完成证明操作
+
++ 交互式证明中如何使用
+ >>挑战者（validator）使用本地数据初始化WASM虚拟机，然后与Rollup合约进行交互。然后使用WASM虚拟机执行交互式证明，证明结果与挑战者本地数据进行比较，如果不一致则挑战成功，否则挑战失败,WASM将RBlock操作拆分至一个op code,并在L1 rollup中完成证明操作
