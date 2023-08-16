@@ -7,13 +7,13 @@
 
 ### 实现
 
-通过将交易批量处理并将其提交到以太坊主链之前进行验证，从而大大提高了交易吞吐量，并降低了交易费用（在layer2上运行所有交易，改变layer2状态，并将layer2全局的Merkle根更新至layer1合约中）
+通过将交易批量处理并将其提交到以太坊主链之前进行验证，从而大大提高了交易吞吐量，并降低了交易费用
 
 ### 应用
 
 Arbitrum One
 
-## 成员角色
+### 成员角色
 
 + Sequencer(layer2):  是一个专门指定的全节点，被赋予有限的权力来控制交易的排序（offchain运行）
 + Validator(layer2):
@@ -27,7 +27,7 @@ Arbitrum One
 + Rollup & Challenge Contract(layer1)：用于处理sequencer提交的layer2状态数据，以及处理validator对layer2状态数据的挑战
 + Bridge Contract(layer1): 传入和传出消息的暂存地（包含延迟消息队列 delayedInboxAccs，排序器消息队列sequencerInboxAccs）
 
-## Layer2 交易打包流程
+### Layer2 交易打包流程
 
 描述：
 
@@ -45,7 +45,7 @@ Arbitrum One
 
 ![](/image/0.png)
 
-## DelayInbox : layer2数据打包的另一个方案
+### DelayInbox : layer2数据打包的另一个方案
 
 行为良好的 Sequencer 将接受来自所有请求者的交易并公平对待它们，从而尽快为每个请求者提供承诺的交易结果。
 
@@ -246,7 +246,7 @@ challengerManager合约会将挑战者的机器状态二分，并记录当前挑
 
 .....
 
-当分段到只有一个op code时,挑战者使用本地机器生成状态proof,并挑战者调用oneStepProveExecution,在challenger合约中,生成一个机器对象,并使用该对象来执行最后一步有争议的op code。根据执行后的mach.hash(),来决定挑战者是否胜利。
+当分段到只有一个op code时,挑战者使用本地机器生成状态proof，并挑战者调用oneStepProveExecution，在challenger合约中，生成一个机器对象，并使用该对象来执行最后一步有争议的op code。根据执行后的mach.hash()，来决定挑战者是否胜利。
 
 ```solidity
     bytes32 afterHash = osp.proveOneStep(
@@ -333,13 +333,12 @@ AnyTrust依靠外部数据可用性委员会来存储数据并按需提供数，
 
 ![](/image/6.jpg)
 
-## note
-
-+ RBlock确认后如何将RBlock stateRoot更新到L1
-
->rollup contract stakeNewNode function
 
 
 ## 参考资料
 
 <https://docs.arbitrum.io/inside-arbitrum-nitro/>
+
+<https://soliditydeveloper.com/arbitrum-nitro/>
+
+<https://medium.com/privacy-scaling-explorations/a-technical-introduction-to-arbitrums-optimistic-rollup-860955ea5fec/>
