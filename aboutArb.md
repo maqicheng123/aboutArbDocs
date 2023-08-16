@@ -97,7 +97,7 @@ function addSequencerL2Batch(
         bytes32 messageDataHash
     ) external;
 ```
-
+### 示意图
 ![](/image/8.png)
 
 ## 跨链消息传递
@@ -225,15 +225,19 @@ rollup layer2 交易打包流程...
 Arbitrum是乐观的，这意味着Arbitrum通过让任何一方（“验证者”）在第1层发布该方声称正确的RBlock，然后给其他人一个挑战该主张的机会来推进其链的状态。如果质询期（大约一周）过去了，并且没有人质疑声称的RBlock，则 Arbitrum 确认RBlock正确。如果有人在质疑期间对索赔提出质疑，那么Arbitrum会使用有效的争议解决协议（来识别哪一方在撒谎。说谎者将没收押金，说真话的人将收取部分押金作为对他们努力的奖励（一些存款被烧毁，保证即使有一些串通，骗子也会受到惩罚）
 
 ### 使用交互式欺诈证明解决争议
-原因：
+
+争议原因：
+
 在sequencer将数据提交至layer1后，会触发事件 emit SequencerBatchData(seqMessageIndex, data) , 出块validator通过监听事件将该批次的数据在本地状态机器中执行，并调用rollup合约中的stakeOnNewNode函数，将状态根提交到rollup合约中。其他验证者节点watch到事件后，将相同的批次数据进行本地执行。如果出现与原始提交的状态根不同，也可以调用stakeOnNewNode函数将状态根提交至rollup合约。
 
 如图所示：
+
 ![](/image/5.webp)
 
 
 
 交互式欺诈证明解决争议：
+
 挑战者使用本地数据初始化WAVM状态(WASM编译的geth)，并调用challenger合约中的createChallenge函数来创建挑战，并提交机器状态根和全局状态根。
 challengerManager合约会将挑战者的机器状态二分，并记录当前挑战的分段情况。
 
@@ -259,20 +263,6 @@ challengerManager合约会将挑战者的机器状态二分，并记录当前挑
     );
 ```
 
-
-```solidity
-    struct SegmentSelection {
-        uint256 oldSegmentsStart;
-        uint256 oldSegmentsLength;
-        bytes32[] oldSegments;
-        uint256 challengePosition;
-    }
-
-```
-
-挑战始于对全局状态（包括块哈希）进行平分。在对实际机器执行提出争议之前，争议会缩小到单个块。一旦质询被一分为二到单个块， challengeExecution 就可以由挑战者调用。这类似于平分法，因为挑战者必须提供竞争的全局状态和计算机状态，但它使用该信息过渡到执行质询阶段。
-
-一旦缩小到单个块，实际的机器执行就可以一分为二。一旦执行被一分为二为单个步骤， oneStepProveExecution 就可以由挑战者调用。挑战者必须提供证明数据才能执行机器的步骤。如果执行该步骤以与先前断言的状态不同的状态结束，则当前响应者将赢得质询
 
 如图所示：
 ![](/image/11.jpg)
