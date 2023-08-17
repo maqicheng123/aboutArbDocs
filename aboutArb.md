@@ -15,8 +15,9 @@ Arbitrum One
 
 ### 成员角色
 
-+ Sequencer(layer2):  是一个专门指定的全节点，被赋予有限的权力来控制交易的排序（offchain运行）
++ Sequencer(layer2):  是一个专门指定的全节点，被赋予有限的权力来控制交易的排序，并交易数据批量提交至layer1（offchain运行）
 + Validator(layer2):
+   + RBlock : 验证者在本地执行sequencer提交批次数据后，将state Data交到layer2的Rollup合约，合约根据状态数据生成RBlock。
    + active validator: 提出新的 RBlock 来推进链的状态,并且活跃的验证者总是需要质押（需白名单）
    + defensive validator: 监视rollup协议的运行情况。提出正确的RBlocks，则此不会触发防御。但是，如果提出了不正确的RBlock，则此类节点会通过发布正确的RBlock或押注另一方发布的正确RBlock来进行干预。（需白名单）
    + watchtower validator: 不进行质押，它只是监视汇总协议，如果提出了不正确的RBlock，它会发出警报，以便其他人可以干预
@@ -27,9 +28,9 @@ Arbitrum One
 + Rollup & Challenge Contract(layer1)：接收validator提交的layer2状态数据，并提供挑战入口
 + Bridge Contract(layer1): 传入和传出消息的暂存地（包含延迟消息队列 delayedInboxAccs，排序器消息队列sequencerInboxAccs）
 
-<!-- ### 知识提要
-+ RBlock : 验证者在本地执行sequencer提交批次数据后，将状态数据提交到layer2的Rollup合约，合约根据状态数据生成RBlock。新的 RBlock最初将为待定解决状态，最终每个 RBlock 都将通过被确认或被拒绝来解决。已确认的 RBlock 构成了该链已确认的历史。
-![](/image/9.webp) -->
+RBlock 示意图
+
+![](/image/9.webp)
 
 ### Layer2 交易打包流程
 
