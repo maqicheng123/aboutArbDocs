@@ -353,3 +353,5 @@ AnyTrust依靠外部数据可用性委员会来存储数据并按需提供数据
 <https://soliditydeveloper.com/arbitrum-nitro/>
 
 <https://medium.com/privacy-scaling-explorations/a-technical-introduction-to-arbitrums-optimistic-rollup-860955ea5fec/>
+
+<https://hackernoon.com/arbitrum-architecture-inbox/>
