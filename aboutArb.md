@@ -15,7 +15,7 @@ Arbitrum One
 
 ### 成员角色
 
-+ Sequencer(layer2):  是一个专门指定的全节点，被赋予有限的权力来控制交易的排序，并交易数据批量提交至layer1（offchain运行）
++ Sequencer(layer2):  是一个专门指定的全节点，被赋予有限的权力来控制交易的排序，并将交易数据批量提交至layer1（offchain运行）
 + Validator(layer2):
    + RBlock : 验证者在本地执行sequencer提交批次数据后，将state Data交到layer2的Rollup合约，合约根据状态数据生成RBlock。
    + active validator: 提出新的 RBlock 来推进链的状态,并且活跃的验证者总是需要质押（需白名单）
